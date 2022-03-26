@@ -1,31 +1,31 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  inputsSelector,
-  isAuthenticatedSelector,
-  errorMessagesSelector,
-} from '@store/selectors';
-import * as actions from '@store/actions';
 import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
-import css from './Registration.module.scss';
+
+import { register } from '@store/actions';
+import { inputsSelectors } from '@store/slices/inputs';
+import { authSelectors } from '@store/slices/auth';
+import { layoutActions } from '@store/slices/layout';
+import { errorsSelectors, errorsActions } from '@store/slices/errors';
 
 import Logo from '@components/Logo';
 import Button from '@components/Button';
 import Input from '@components/Input/Input';
+import css from './Registration.module.scss';
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { registration: inputs } = useSelector(inputsSelector);
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { registrationErrorMessage } = useSelector(errorMessagesSelector);
+  const inputs = useSelector(inputsSelectors.registrationSelector);
+  const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
+  const errorMessage = useSelector(errorsSelectors.registrationErrorSelector);
 
   useEffect(() => {
-    if (registrationErrorMessage) alert(registrationErrorMessage);
+    if (errorMessage) alert(errorMessage);
     if (isAuthenticated) navigate(`../map`);
-  }, [isAuthenticated, registrationErrorMessage, navigate]);
+  }, [isAuthenticated, errorMessage, navigate]);
 
   const mappedInputs = inputs.map((input) => (
     <Input {...input} key={input.id} />
@@ -33,22 +33,22 @@ const Registration = () => {
 
   const handleBtnClick = (e, page) => {
     e.preventDefault();
-    dispatch(actions.setPage(page));
+    dispatch(layoutActions.setCurrentPage(page));
+    dispatch(errorsActions.setRegistrationErrorMessage(null));
     navigate('../login', { replace: true });
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { email, name: nameInput, password } = e.target;
-    const [name, surname] = nameInput.value.split(' ');
+    const { email, name, password } = e.target;
     const payload = {
       email: email.value,
-      name,
-      surname,
+      name: name.value.split(' ')[0],
+      surname: name.value.split(' ')[1],
       password: password.value,
     };
 
-    dispatch(actions.register(payload));
-    resetInputs([email, nameInput, password]);
+    dispatch(register(payload));
+    resetInputs([email, name, password]);
   };
 
   return (

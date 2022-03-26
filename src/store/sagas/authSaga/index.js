@@ -1,6 +1,8 @@
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, all } from 'redux-saga/effects';
 import { authUser, getCard } from '@api';
-import { auth, authRequestFailed, login, addressesList } from '@store/actions';
+import { auth, addressesList } from '@store/actions';
+import { authActions } from '@store/slices/auth';
+import { errorsActions } from '@store/slices/errors';
 
 export function* fetchAuth({ payload }) {
   try {
@@ -12,11 +14,13 @@ export function* fetchAuth({ payload }) {
         token: data.token,
         payment: card || null,
       };
-      yield put(login(userInfo));
-      yield put(addressesList());
-      yield localStorage.setItem('authToken', data.token);
-      yield localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    } else yield put(authRequestFailed(data.error));
+      yield all([
+        put(authActions.login({ token: data.token })),
+        put(addressesList()),
+        localStorage.setItem('authToken', data.token),
+        localStorage.setItem('userInfo', JSON.stringify(userInfo)),
+      ]);
+    } else yield put(errorsActions.setLoginErrorMessage(data.error));
   } catch (error) {
     console.log(error.message);
   }

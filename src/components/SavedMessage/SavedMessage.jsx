@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import * as actions from '@store/actions';
 import { useNavigate } from 'react-router-dom';
+import { layoutActions } from '@store/slices/layout';
 
 import Button from '@components/Button';
 
@@ -11,7 +11,7 @@ const SavedMessage = () => {
   const navigate = useNavigate();
   const moveToMap = (e) => {
     e.preventDefault();
-    dispatch(actions.setPage('map'));
+    dispatch(layoutActions.setCurrentPage('map'));
     navigate('../map', { replace: true });
   };
   return (

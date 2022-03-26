@@ -1,5 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { login, init, addressesList } from '@store/actions';
+import { init, addressesList } from '@store/actions';
+import { authActions } from '@store/slices/auth';
+import { userActions } from '@store/slices/user';
 
 export function* fetchLocalStorage() {
   const token = yield localStorage.getItem('authToken');
@@ -7,7 +9,9 @@ export function* fetchLocalStorage() {
 
   const isUserSaved = !!token && !!user;
   if (isUserSaved) {
-    yield put(login({ token, email: user.email, payment: user.payment }));
+    yield put(authActions.login({ token }));
+    yield put(userActions.setEmail({ email: user.email }));
+    yield put(userActions.setPayment({ payment: user.payment }));
     yield put(addressesList());
   }
 }

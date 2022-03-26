@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { inputsSelector } from '@store/selectors';
+import { inputsSelectors } from '@store/slices/inputs';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ import Button from '@components/Button';
 import './ProfileSettings.scss';
 
 const ProfileSettings = ({ onSubmit }) => {
-  const { profile: inputs } = useSelector(inputsSelector);
+  const inputs = useSelector(inputsSelectors.profileSelector);
   const [period, setPeriod] = useState('');
   const [cardNumber, setCardNumber] = useState('');
 

@@ -1,38 +1,39 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '@store/actions';
-import {
-  inputsSelector,
-  isAuthenticatedSelector,
-  errorMessagesSelector,
-} from '@store/selectors';
 import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
-import css from './Login.module.scss';
+
+import * as actions from '@store/actions';
+import { layoutActions } from '@store/slices/layout';
+
+import { inputsSelectors } from '@store/slices/inputs';
+import { authSelectors } from '@store/slices/auth';
+import { errorsSelectors, errorsActions } from '@store/slices/errors';
 
 import Logo from '@components/Logo';
 import Button from '@components/Button';
 import Input from '@components/Input/Input';
+import css from './Login.module.scss';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { login: loginInputs } = useSelector(inputsSelector);
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { authErrorMessage } = useSelector(errorMessagesSelector);
-
+  const loginInputs = useSelector(inputsSelectors.loginSelector);
+  const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
+  const errorMessage = useSelector(errorsSelectors.loginErrorSelector);
   useEffect(() => {
-    if (authErrorMessage) alert(authErrorMessage);
+    if (errorMessage) alert(errorMessage);
     if (isAuthenticated) navigate(`../map`);
-  }, [isAuthenticated, authErrorMessage, navigate]);
+  }, [isAuthenticated, errorMessage, navigate]);
 
   const mappedInputs = loginInputs.map((input) => (
     <Input {...input} key={input.id} />
   ));
   const handleRegisterClick = (e, page) => {
     e.preventDefault();
-    dispatch(actions.setPage(page));
+    dispatch(layoutActions.setCurrentPage(page));
+    dispatch(errorsActions.setLoginErrorMessage(null));
     navigate('../registration', { replace: true });
   };
 

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addressesListSelector } from '@store/selectors';
+import { layoutSelectors } from '@store/slices/layout';
 
 import * as actions from '@store/actions';
 
@@ -14,7 +14,7 @@ import css from './Order.module.scss';
 
 const Order = () => {
   const dispatch = useDispatch();
-  const addresses = useSelector(addressesListSelector);
+  const addresses = useSelector(layoutSelectors.addressesSelector);
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
 

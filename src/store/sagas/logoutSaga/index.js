@@ -1,9 +1,14 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { logout, preLogout } from '@store/actions';
+import { put, takeEvery, all } from 'redux-saga/effects';
+import { preLogout } from '@store/actions';
+import { authActions } from '@store/slices/auth';
+import { layoutActions } from '@store/slices/layout';
 
 export function* clearStorage() {
   localStorage.clear();
-  yield put(logout());
+  yield all([
+    put(authActions.logout()),
+    put(layoutActions.setCurrentPage('map')),
+  ]);
 }
 
 function* watchLogoutAction() {

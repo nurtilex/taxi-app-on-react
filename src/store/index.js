@@ -1,18 +1,19 @@
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import rootReducer from './reducer';
-import { createStore, applyMiddleware, compose } from 'redux';
+
+import { layout } from '@store/slices/layout';
+import { auth } from '@store/slices/auth';
+import { user } from '@store/slices/user';
+import { errors } from '@store/slices/errors';
+import { inputs } from '@store/slices/inputs';
 
 const sagaMiddleware = createSagaMiddleware();
-// const devTools =
-//   process.env.NODE_ENV === 'development'
-//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-//       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
-//     : null;
-const store = createStore(
-  rootReducer,
-  compose(applyMiddleware(sagaMiddleware))
-);
+const store = configureStore({
+  reducer: { layout, auth, user, errors, inputs },
+  middleware: [sagaMiddleware],
+});
+
 sagaMiddleware.run(rootSaga);
 
 export default store;

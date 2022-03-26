@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { isAuthenticatedSelector } from '@store/selectors';
+import { authSelectors } from '@store/slices/auth';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ element }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
 
   return isAuthenticated ? element : <Navigate to="/login" />;
 };

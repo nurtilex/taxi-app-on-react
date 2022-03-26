@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { currentPageSelector, inputsSelector } from '@store/selectors';
+// import { currentPageSelector, inputsSelector } from '@store/selectors';
+import { layoutSelectors, layoutActions } from '@store/slices/layout';
+import { inputsSelectors } from '@store/slices/inputs';
 import * as actions from '@store/actions';
 import { useNavigate } from 'react-router-dom';
 import css from './NavBar.module.scss';
 
 const NavBar = () => {
-  const currentPage = useSelector(currentPageSelector);
-  const { navbar: inputs } = useSelector(inputsSelector);
+  const currentPage = useSelector(layoutSelectors.currentPageSelector);
+  const inputs = useSelector(inputsSelectors.navbarSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -14,14 +16,14 @@ const NavBar = () => {
     if (toWhere === 'login') {
       dispatch(actions.preLogout());
     } else {
-      dispatch(actions.setPage(toWhere));
+      dispatch(layoutActions.setCurrentPage(toWhere));
     }
 
     navigate(`../${toWhere}`, { replace: true });
   };
 
   return (
-    <ul className={css.list} data-testid='navbar ul'>
+    <ul className={css.list} data-testid="navbar ul">
       {inputs.map(({ name, link, id }) => {
         return (
           <li key={id}>

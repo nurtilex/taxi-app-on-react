@@ -1,5 +1,7 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { payment, paymentUpdate, paymentRequestFailed } from '@store/actions';
+import { payment } from '@store/actions';
+import { userActions } from '@store/slices/user';
+import { errorsActions } from '@store/slices/errors';
 import { getCard, setCard } from '@api';
 
 export function* fetchPayment({ payload: { method, token, payment } }) {
@@ -7,13 +9,13 @@ export function* fetchPayment({ payload: { method, token, payment } }) {
     if (method === 'post') {
       // data = {success: true} or {success: false, error: Сообщение об ошибке}
       const data = yield call(setCard, { ...payment, token });
-      
-      if (data.success) yield put(paymentUpdate(payment));
-      else yield put(paymentRequestFailed(data.error));
+
+      if (data.success) yield put(userActions.setPayment({payment}));
+      else yield put(errorsActions.setPaymentErrorMessage(data.error));
     }
     if (method === 'get') {
       const data = yield call(getCard, token);
-      yield put(paymentUpdate, data);
+      yield put(userActions.setPayment({payment: data}));
     }
   } catch (error) {
     console.error(error.message);

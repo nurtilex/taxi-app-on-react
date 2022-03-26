@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { authenticationTokenSelector } from '@store/selectors';
+
+import { authSelectors } from '@store/slices/auth';
 import { payment } from '@store/actions';
-import css from './Profile.module.scss';
 
 import Header from '@components/Header';
 import ProfileSettings from '@components/ProfileSettings';
 import SavedMessage from '@components/SavedMessage';
+import css from './Profile.module.scss';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [isSaved, setSaved] = useState(false);
-  const authToken = useSelector(authenticationTokenSelector);
+  const token = useSelector(authSelectors.tokenSelector);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Profile = () => {
       cvc: cvc.value,
     };
     setTimeout(() => setSaved((prev) => !prev), 500);
-    dispatch(payment({ method: 'post', token: authToken, payment: formData }));
+    dispatch(payment({ method: 'post', token, payment: formData }));
   };
 
   const form = <ProfileSettings onSubmit={handleFormSubmit} />;

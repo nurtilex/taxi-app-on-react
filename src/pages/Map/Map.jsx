@@ -1,25 +1,23 @@
-import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  isAuthenticatedSelector,
-  paymentSelector,
-  coordinatesSelector,
-} from '@store/selectors';
-import { mapboxAccessToken } from '@src/env.js';
 import { drawRoute } from '@helper';
-import css from './Map.module.scss';
+
+import { authSelectors } from '@store/slices/auth';
+import { userSelectors } from '@store/slices/user';
+import { layoutSelectors } from '@store/slices/layout';
+
+import mapboxgl from 'mapbox-gl';
+import { mapboxAccessToken } from '@src/env.js';
 
 import Header from '@components/Header';
 import Order from '@components/Order';
-
-
+import css from './Map.module.scss';
 
 const Map = () => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const payment = useSelector(paymentSelector);
-  const coordinates = useSelector(coordinatesSelector);
+  const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
+  const payment = useSelector(userSelectors.paymentSelector);
+  const coordinates = useSelector(layoutSelectors.coordinatesSelector);
   const navigate = useNavigate();
   const mapRef = useRef(null);
   useEffect(() => {

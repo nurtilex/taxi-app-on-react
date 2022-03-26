@@ -7,6 +7,8 @@ const { post, get } = axios.create({
 
 // props example - {email: "email@example.com", password: "password", name: "Name", surname: "Surname"}
 export const registerUser = async (props) => {
+  console.log('🚀 ~ file: index.js ~ line 10 ~ registerUser ~ props', props);
+
   const { data } = await post('/register', props);
   return data;
 };
