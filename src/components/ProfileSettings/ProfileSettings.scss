@@ -1,0 +1,128 @@
+.ProfileSettings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  width: 40rem;
+  height: 27rem;
+  background: #ffffff;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  .subtitle {
+    color: #7b7b7b;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 85%;
+      height: 12rem;
+
+      .inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-column-gap: 0.3rem;
+        grid-row-gap: 0.3rem;
+        justify-items: stretch;
+        align-items: stretch;
+        padding: 0.2rem;
+        width: 47%;
+        height: 90%;
+
+        .inp-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: stretch;
+          align-items: stretch;
+
+          label {
+            font-weight: 400;
+            width: 100%;
+            color: #828282;
+          }
+          input {
+            width: 100%;
+            font-weight: bold;
+          }
+        }
+
+        .name,
+        .number {
+          grid-column: 1 / 3;
+        }
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.6rem 0;
+        width: 45%;
+        height: 70%;
+        background: #ffffff;
+        box-shadow: 0px 5px 20px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
+        & > div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 0.4rem;
+          width: 85%;
+          height: 1.5rem;
+        }
+
+        .card__icon {
+          width: 24px;
+          height: 100%;
+
+          &--y {
+            background: url('../../assets/y-icon.svg') center no-repeat;
+            background-size: cover;
+          }
+          &--chip {
+            background: url('../../assets/chip.svg') center no-repeat;
+            background-size: cover;
+          }
+          &--masterCard {
+            position: relative;
+            background: url('../../assets/ellipse.svg') center no-repeat;
+            background-size: cover;
+
+            &::after {
+              content: '';
+              position: absolute;
+              width: 24px;
+              height: 100%;
+              top: 0;
+              right: -10px;
+              background: url('../../assets/ellipse.svg') center no-repeat;
+              background-size: cover;
+            }
+          }
+        }
+        .card__period {
+          font-size: 0.7rem;
+        }
+        .card__number {
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

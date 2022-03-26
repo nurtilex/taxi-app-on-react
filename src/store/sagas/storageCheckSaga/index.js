@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { login, init, addressesList } from '../../actions';
+import { login, init, addressesList } from '@store/actions';
 
 export function* fetchLocalStorage() {
   const token = yield localStorage.getItem('authToken');

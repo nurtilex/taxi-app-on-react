@@ -15,7 +15,7 @@ const rootReducer = (state = initialState(), { type, payload }) => {
         },
       };
     case 'LOGOUT':
-      return initialState;
+      return initialState();
     case 'PAYMENT_UPDATE':
       return { ...state, userInfo: { ...state.userInfo, payment: payload } };
     case 'ADDRESSES_REQUEST_SUCCEEDED':

@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { registerUser } from '../../../api';
-import { register, login, registrationRequestFailed } from '../../actions';
+import { registerUser } from '@api';
+import { register, login, registrationRequestFailed } from '@store/actions';
 
 export function* fetchRegistration({ payload }) {
   try {

@@ -6,10 +6,14 @@ module.exports = {
   // ...
   webpack: {
     alias: {
+      '@src': resolvePath('./src'),
       '@components': resolvePath('./src/components'),
       '@assets': resolvePath('./src/assets'),
-      '@api': resolvePath('./src/api'),
-      '@store': resolvePath('./src/store')
+      '@store': resolvePath('./src/store'),
+      '@pages': resolvePath('./src/pages'),
+      '@helper': resolvePath('./src/services/helper'),
+      '@hoc': resolvePath('./src/services/hoc'),
+      '@api': resolvePath('./src/services/api'),
     },
   },
   style: {

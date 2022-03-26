@@ -1,0 +1,49 @@
+.TariffCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3px 0;
+  align-items: flex-start;
+  width: 30%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .type {
+    height: 0.8rem;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+  .priceSpan {
+    height: 0.5rem;
+    font-size: 0.6rem;
+    color: #828282;
+    margin-left: 5px;
+  }
+  .price {
+    height: 1.2rem;
+    font-size: 1.1rem;
+    margin-left: 5px;
+  }
+
+  .carImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50%;
+    align-self: center;
+    margin-top: 5px;
+
+    & > img {
+      transform: scale(0.65);
+    }
+  }
+}

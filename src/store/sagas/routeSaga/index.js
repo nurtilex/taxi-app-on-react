@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { getRoute } from '../../../api';
-import { routesRequestSucceeded, route } from '../../actions';
+import { getRoute } from '@api';
+import { routesRequestSucceeded, route } from '@store/actions';
 
 export function* fetchRoute({ payload }) {
   try {

@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { payment, paymentUpdate, paymentRequestFailed } from '../../actions';
-import { getCard, setCard } from '../../../api';
+import { payment, paymentUpdate, paymentRequestFailed } from '@store/actions';
+import { getCard, setCard } from '@api';
 
 export function* fetchPayment({ payload: { method, token, payment } }) {
   try {

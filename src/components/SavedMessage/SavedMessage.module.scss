@@ -1,0 +1,20 @@
+.SavedMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 40rem;
+  height: 15rem;
+  background: #ffffff;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  .subtitle {
+    color: #7b7b7b;
+  }
+  button {
+    margin: 0;
+    font-weight: bold;
+  }
+}

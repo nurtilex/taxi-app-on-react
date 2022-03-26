@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 13rem;
+  height: auto;
+  list-style: none;
+
+  .listItemButton {
+    background-color: transparent;
+    border: none;
+    color: #f6f0e5;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.active {
+      color: #fdbf5a;
+    }
+  }
+}

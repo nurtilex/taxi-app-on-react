@@ -1,0 +1,13 @@
+.Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 15rem;
+  height: auto;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

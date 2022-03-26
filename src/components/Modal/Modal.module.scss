@@ -1,0 +1,24 @@
+.modalWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(240, 229, 229, 0.575);
+
+  .Modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 70%;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+
+  .text {
+    text-align: center;
+  }
+}

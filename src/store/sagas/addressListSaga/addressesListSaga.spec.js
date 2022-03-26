@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { fetchAddresses } from './index';
-import { addressesRequestSucceeded } from '../../actions';
-import { getAddressesList } from '../../../api';
+import { addressesRequestSucceeded } from '@store/actions';
+import { getAddressesList } from '@api';
 
 const assert = require('assert');
 

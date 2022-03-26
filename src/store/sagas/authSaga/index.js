@@ -1,6 +1,6 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
-import { authUser, getCard } from '../../../api';
-import { auth, authRequestFailed, login, addressesList } from '../../actions';
+import { authUser, getCard } from '@api';
+import { auth, authRequestFailed, login, addressesList } from '@store/actions';
 
 export function* fetchAuth({ payload }) {
   try {

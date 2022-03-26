@@ -1,6 +1,6 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
-import { getAddressesList } from '../../../api';
-import { addressesList, addressesRequestSucceeded } from '../../actions';
+import { getAddressesList } from '@api';
+import { addressesList, addressesRequestSucceeded } from '@store/actions';
 
 export function* fetchAddresses() {
   try {

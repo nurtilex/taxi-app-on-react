@@ -1,0 +1,53 @@
+.AddressInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 3rem;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    transform: scale(0.6);
+  }
+
+  .input {
+    height: 100%;
+    flex-grow: 1;
+    border: none;
+    font-size: 1rem;
+    padding: 0 0.3rem;
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    font-size: 1.5rem;
+    color: #c4c4c4;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .clearButton {
+    transform: rotate(45deg);
+  }
+  .openButton > img {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+
+  .separator {
+    width: 1px;
+    height: 50%;
+    background-color: #c4c4c4;
+  }
+}

@@ -1,0 +1,58 @@
+.Order {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  width: 21rem;
+  height: 20rem;
+  background: #ffffff;
+  box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    width: 100%;
+    height: 30%;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.062);
+    border-radius: 10px;
+    & > hr {
+      width: 85%;
+      height: 1px;
+      background-color: #e0e0e0;
+    }
+  }
+
+  .confirming {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 65%;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.089);
+    border-radius: 10px;
+
+    .rates {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 75%;
+      height: 50%;
+    }
+
+    & > button {
+      margin: 0;
+      width: 75%;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { logout, preLogout } from '../../actions';
+import { logout, preLogout } from '@store/actions';
 
 export function* clearStorage() {
   localStorage.clear();
