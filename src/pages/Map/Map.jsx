@@ -14,6 +14,8 @@ import css from './Map.module.scss';
 import Header from '@components/Header';
 import Order from '@components/Order';
 
+
+
 const Map = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const payment = useSelector(paymentSelector);
