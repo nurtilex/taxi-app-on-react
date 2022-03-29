@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
@@ -17,17 +17,24 @@ import css from './Login.module.scss';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
 
   const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
   const errorMessage = useSelector(errorsSelectors.loginErrorSelector);
   useEffect(() => {
-    if (errorMessage) alert(errorMessage);
-    if (isAuthenticated) navigate(`../map`);
+    if (errorMessage || isAuthenticated) setLoading(false);
+    if (errorMessage) {
+      alert(errorMessage);
+    }
+    if (isAuthenticated) {
+      navigate(`../map`);
+    }
   }, [isAuthenticated, errorMessage, navigate]);
 
   const mappedInputs = loginInputs.map((input) => (
     <Input {...input} key={input.id} />
   ));
+  const loader = <div>...Загрузка</div>;
   const handleRegisterClick = (e, page) => {
     e.preventDefault();
     dispatch(layoutActions.setCurrentPage(page));
@@ -39,8 +46,7 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = e.target;
     dispatch(actions.auth({ email: email.value, password: password.value }));
-
-    setTimeout(() => resetInputs([email, password]), 500);
+    setLoading(true);
   };
 
   return (
@@ -51,26 +57,34 @@ const Login = () => {
 
       <main className={css.main}>
         <div className={css.formWrapper}>
-          <h2>Войти</h2>
-          <form
-            action="#"
-            className={css.form}
-            onSubmit={(e) => handleFormSubmit(e)}
-          >
-            {mappedInputs}
-            <div className={css.helpWrapper}>
-              <a href="##" className={css.helpButton}>
-                Забыли пароль?
-              </a>
-            </div>
-            <Button text={'Войти'} type={'submit'} />
-            <div className={css.link}>
-              Новый пользователь?{' '}
-              <button onClick={(e) => handleRegisterClick(e, 'registration')}>
-                Регистрация
-              </button>
-            </div>
-          </form>
+          {isLoading ? (
+            loader
+          ) : (
+            <>
+              <h2>Войти</h2>
+              <form
+                action="#"
+                className={css.form}
+                onSubmit={(e) => handleFormSubmit(e)}
+              >
+                {mappedInputs}
+                <div className={css.helpWrapper}>
+                  <a href="##" className={css.helpButton}>
+                    Забыли пароль?
+                  </a>
+                </div>
+                <Button text={'Войти'} type={'submit'} />
+                <div className={css.link}>
+                  Новый пользователь?{' '}
+                  <button
+                    onClick={(e) => handleRegisterClick(e, 'registration')}
+                  >
+                    Регистрация
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </main>
     </div>

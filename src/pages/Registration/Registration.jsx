@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
@@ -20,8 +20,10 @@ const Registration = () => {
 
   const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
   const errorMessage = useSelector(errorsSelectors.registrationErrorSelector);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (errorMessage || isAuthenticated) setLoading(false);
     if (errorMessage) alert(errorMessage);
     if (isAuthenticated) navigate(`../map`);
   }, [isAuthenticated, errorMessage, navigate]);
@@ -29,6 +31,7 @@ const Registration = () => {
   const mappedInputs = inputs.map((input) => (
     <Input {...input} key={input.id} />
   ));
+  const loader = <div>...Загрузка</div>;
 
   const handleBtnClick = (e, page) => {
     e.preventDefault();
@@ -47,7 +50,7 @@ const Registration = () => {
     };
 
     dispatch(register(payload));
-    resetInputs([email, name, password]);
+    setLoading(true);
   };
 
   return (
@@ -58,24 +61,30 @@ const Registration = () => {
 
       <main className={css.main}>
         <div className={css.formWrapper}>
-          <h2>Регистрация</h2>
-          <form
-            action="#"
-            className={css.form}
-            onSubmit={(e) => handleFormSubmit(e)}
-          >
-            {mappedInputs}
-            <Button text={'Зарегистрироваться'} type={'submit'} />
-            <div className={css.link}>
-              Уже зарегистрированны?&nbsp;
-              <button
-                type={'button'}
-                onClick={(e) => handleBtnClick(e, 'login')}
+          {isLoading ? (
+            loader
+          ) : (
+            <>
+              <h2>Регистрация</h2>
+              <form
+                action="#"
+                className={css.form}
+                onSubmit={(e) => handleFormSubmit(e)}
               >
-                Войти
-              </button>
-            </div>
-          </form>
+                {mappedInputs}
+                <Button text={'Зарегистрироваться'} type={'submit'} />
+                <div className={css.link}>
+                  Уже зарегистрированны?&nbsp;
+                  <button
+                    type={'button'}
+                    onClick={(e) => handleBtnClick(e, 'login')}
+                  >
+                    Войти
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </main>
     </div>

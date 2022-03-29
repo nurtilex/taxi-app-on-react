@@ -7,6 +7,7 @@ import { errorsActions } from '@store/slices/errors';
 
 export function* fetchAuth({ payload }) {
   try {
+    yield put(errorsActions.setLoginErrorMessage(null));
     const data = yield call(authUser, payload);
     if (data.success) {
       const card = yield call(getCard, data.token);

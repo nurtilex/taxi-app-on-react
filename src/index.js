@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from "@store"
+import store from '@store';
 
 import reportWebVitals from './reportWebVitals';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import '@assets/commonStyles/index.css';
 
 ReactDOM.render(

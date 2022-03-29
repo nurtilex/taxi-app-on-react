@@ -18,13 +18,13 @@ const Map = () => {
   const payment = useSelector(userSelectors.paymentSelector);
   const coordinates = useSelector(layoutSelectors.coordinatesSelector);
   const navigate = useNavigate();
-  const mapRef = useRef(null);
-  let map;
+  const mapContainer = useRef(null);
+  const map = useRef(null);
   useEffect(() => {
-    if (!map) {
-      map = new mapboxgl.Map({
+    if (!map.current) {
+      map.current = new mapboxgl.Map({
         accessToken: mapboxAccessToken,
-        container: mapRef.current,
+        container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v10',
         center: [30.19, 59.57],
         zoom: 11,
@@ -34,16 +34,48 @@ const Map = () => {
     if (isAuthenticated && !payment) {
       navigate('/modal', { replace: true });
     }
+    console.log(Array.isArray(coordinates) && coordinates.length > 0);
     if (Array.isArray(coordinates) && coordinates.length > 0) {
-      map.on('styledata', () => {
-        drawRoute(map, coordinates);
+      map.current.on('styledata', () => {
+        map.current.flyTo({
+          center: coordinates[0],
+          zoom: 15,
+        });
+
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates,
+              },
+            },
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#ffc617',
+            'line-width': 8,
+          },
+        });
       });
     }
+
+    return () => {
+      map?.current && map?.current.remove();
+    };
   }, [isAuthenticated, payment, coordinates, navigate]);
   return (
     <div className={css.Map}>
       <Header />
-      <main className={css.main} id="map" ref={mapRef}></main>
+      <main className={css.main} id="map" ref={mapContainer}></main>
       <Order />
     </div>
   );
