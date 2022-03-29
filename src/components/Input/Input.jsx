@@ -11,15 +11,11 @@ const Input = ({
   onChange = () => {},
   value = '',
   pattern,
-  testId = ''
+  testId = '',
 }) => {
   return (
     <>
-      <label
-        htmlFor={name}
-        className={css.label}
-        data-testid={testId}
-      >
+      <label htmlFor={name} className={css.label} data-testid={testId}>
         {text}
       </label>
       <input
@@ -44,6 +40,7 @@ Input.propTypes = {
   required: PropTypes.bool,
   onChange: PropTypes.func,
   value: PropTypes.string,
+  testId: PropTypes.string,
 };
 
 export default Input;

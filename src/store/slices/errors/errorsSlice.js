@@ -14,6 +14,9 @@ const errors = createSlice({
     setPaymentErrorMessage(state, action) {
       state.payment = action.payload;
     },
+    reset(state) {
+      state = initialState;
+    },
   },
 });
 

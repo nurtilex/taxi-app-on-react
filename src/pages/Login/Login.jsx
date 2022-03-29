@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
 
+import { errorsSelectors, errorsActions } from '@store/slices/errors';
 import * as actions from '@store/actions';
 import { layoutActions } from '@store/slices/layout';
-
-import { inputsSelectors } from '@store/slices/inputs';
 import { authSelectors } from '@store/slices/auth';
-import { errorsSelectors, errorsActions } from '@store/slices/errors';
+import { loginInputs } from '@helper/inputs.config.js';
 
 import Logo from '@components/Logo';
 import Button from '@components/Button';
@@ -19,7 +18,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginInputs = useSelector(inputsSelectors.loginSelector);
   const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
   const errorMessage = useSelector(errorsSelectors.loginErrorSelector);
   useEffect(() => {

@@ -1,28 +1,35 @@
-import { useSelector } from 'react-redux';
-import { inputsSelectors } from '@store/slices/inputs';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { userSelectors } from '@store/slices/user';
+import { profileInputs } from '@helper/inputs.config.js';
 
 import Input from '@components/Input';
 import Button from '@components/Button';
-
 import './ProfileSettings.scss';
 
+
 const ProfileSettings = ({ onSubmit }) => {
-  const inputs = useSelector(inputsSelectors.profileSelector);
-  const [period, setPeriod] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
+  const card = useSelector(userSelectors.paymentSelector);
+
+  const [period, setPeriod] = useState(card?.expiryDate || '');
+  const [cardNumber, setCardNumber] = useState(card?.cardNumber || '');
 
   const handleInputsUpdate = (e) => {
     const { name, value } = e.target;
-    if (name === 'period') setPeriod(value);
+    if (name === 'expiryDate') setPeriod(value);
     if (name === 'cardNumber') setCardNumber(value);
   };
 
-  const mappedInputs = inputs.map((input, index) => {
+  const mappedInputs = profileInputs.map((input, index) => {
     return (
       <div className={`${input.name} inp-wrapper`} key={index}>
-        <Input {...input} onChange={handleInputsUpdate} />
+        <Input
+          {...input}
+          onChange={handleInputsUpdate}
+          value={card?.[input.name] || ''}
+        />
       </div>
     );
   });

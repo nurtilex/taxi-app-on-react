@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import css from './AddressInput.module.scss';
 import Arrow from '@assets/arrow-down.svg';
+import css from './AddressInput.module.scss';
 
 const AddressInput = ({
   svgComponent,
@@ -24,6 +24,11 @@ const AddressInput = ({
   };
 
   const handleInputChange = (e) => {
+    const isValid = options.some((opt) => opt.value === e.target.value);
+    if (!isValid) {
+      e.target.value = '';
+      return
+    }
     onValueChange(e.target.value);
   };
 
@@ -36,7 +41,7 @@ const AddressInput = ({
         name={name}
         ref={inputRef}
         autoComplete="on"
-        list={`${name}-suggestions`}
+        list={`suggestions-for-${name}`}
         className={css.input}
         placeholder={placeholder}
         onChange={(e) => handleInputChange(e)}

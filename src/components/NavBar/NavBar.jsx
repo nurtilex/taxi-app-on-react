@@ -1,19 +1,20 @@
-import { useSelector, useDispatch } from 'react-redux';
-// import { currentPageSelector, inputsSelector } from '@store/selectors';
-import { layoutSelectors, layoutActions } from '@store/slices/layout';
-import { inputsSelectors } from '@store/slices/inputs';
-import * as actions from '@store/actions';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+
+import { navbarInputs as inputs } from '@helper/inputs.config.js';
+import { layoutActions } from '@store/slices/layout';
+import * as actions from '@store/actions';
+
 import css from './NavBar.module.scss';
 
 const NavBar = () => {
-  const currentPage = useSelector(layoutSelectors.currentPageSelector);
-  const inputs = useSelector(inputsSelectors.navbarSelector);
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleNavClick = (toWhere) => {
-    if (toWhere === 'login') {
+    if (toWhere === 'logout') {
       dispatch(actions.preLogout());
     } else {
       dispatch(layoutActions.setCurrentPage(toWhere));
@@ -29,7 +30,7 @@ const NavBar = () => {
           <li key={id}>
             <button
               className={`${css.listItemButton} ${
-                currentPage === link && css.active
+                pathname === `/${link}` && css.active
               }`}
               onClick={() => handleNavClick(link)}
             >

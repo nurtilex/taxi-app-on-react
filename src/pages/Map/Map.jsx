@@ -6,7 +6,6 @@ import { drawRoute } from '@helper';
 import { authSelectors } from '@store/slices/auth';
 import { userSelectors } from '@store/slices/user';
 import { layoutSelectors } from '@store/slices/layout';
-
 import mapboxgl from 'mapbox-gl';
 import { mapboxAccessToken } from '@src/env.js';
 
@@ -20,14 +19,18 @@ const Map = () => {
   const coordinates = useSelector(layoutSelectors.coordinatesSelector);
   const navigate = useNavigate();
   const mapRef = useRef(null);
+  let map;
   useEffect(() => {
-    const map = new mapboxgl.Map({
-      accessToken: mapboxAccessToken,
-      container: mapRef.current,
-      style: 'mapbox://styles/mapbox/light-v10',
-      center: [37.61, 55.75],
-      zoom: 11,
-    });
+    if (!map) {
+      map = new mapboxgl.Map({
+        accessToken: mapboxAccessToken,
+        container: mapRef.current,
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [30.19, 59.57],
+        zoom: 11,
+      });
+    }
+
     if (isAuthenticated && !payment) {
       navigate('/modal', { replace: true });
     }

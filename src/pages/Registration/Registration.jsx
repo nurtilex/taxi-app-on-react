@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { resetInputs } from '@helper';
 
 import { register } from '@store/actions';
-import { inputsSelectors } from '@store/slices/inputs';
+import { registrationInputs as inputs } from '@helper/inputs.config.js';
 import { authSelectors } from '@store/slices/auth';
 import { layoutActions } from '@store/slices/layout';
 import { errorsSelectors, errorsActions } from '@store/slices/errors';
@@ -18,7 +18,6 @@ const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const inputs = useSelector(inputsSelectors.registrationSelector);
   const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
   const errorMessage = useSelector(errorsSelectors.registrationErrorSelector);
 

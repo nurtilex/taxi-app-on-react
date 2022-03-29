@@ -14,6 +14,11 @@ const user = createSlice({
     setName(state, action) {
       state.name = action.payload.name;
     },
+    reset(state) {
+      state.payment = null;
+      state.email = null;
+      state.name = null;
+    },
   },
 });
 

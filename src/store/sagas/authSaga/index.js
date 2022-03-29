@@ -2,6 +2,7 @@ import { put, call, takeEvery, all } from 'redux-saga/effects';
 import { authUser, getCard } from '@api';
 import { auth, addressesList } from '@store/actions';
 import { authActions } from '@store/slices/auth';
+import { userActions } from '@store/slices/user';
 import { errorsActions } from '@store/slices/errors';
 
 export function* fetchAuth({ payload }) {
@@ -9,6 +10,10 @@ export function* fetchAuth({ payload }) {
     const data = yield call(authUser, payload);
     if (data.success) {
       const card = yield call(getCard, data.token);
+      if (card.id) {
+        yield put(userActions.setPayment({ payment: card }));
+      }
+      yield put(userActions.setEmail({ email: payload.email }));
       const userInfo = {
         email: payload.email,
         token: data.token,
