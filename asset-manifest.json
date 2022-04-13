@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/taxi-app-on-react/static/css/main.75d041fa.css",
-    "main.js": "/taxi-app-on-react/static/js/main.1d70def3.js",
+    "main.css": "/taxi-app-on-react/static/css/main.9f3f7909.css",
+    "main.js": "/taxi-app-on-react/static/js/main.d96d13bd.js",
     "static/js/787.dd22ab19.chunk.js": "/taxi-app-on-react/static/js/787.dd22ab19.chunk.js",
     "static/media/map-bg.png": "/taxi-app-on-react/static/media/map-bg.6f03adef9250a774ee04.png",
-    "static/media/lofttaxi.svg": "/taxi-app-on-react/static/media/lofttaxi.960eac80dbf01332a3808299faf2c1a2.svg",
-    "static/media/nav-icon.svg": "/taxi-app-on-react/static/media/nav-icon.19b217c35ad6f8f39adb5e16870e28dd.svg",
-    "static/media/y-icon.svg": "/taxi-app-on-react/static/media/y-icon.25c19675e929a3065fc4c46bb5d4d3e1.svg",
+    "static/media/lofttaxi.svg": "/taxi-app-on-react/static/media/lofttaxi.952af46236826d22cc5f09b10694c643.svg",
+    "static/media/nav-icon.svg": "/taxi-app-on-react/static/media/nav-icon.63ff29045f7d664f75a224c471aae768.svg",
+    "static/media/y-icon.svg": "/taxi-app-on-react/static/media/y-icon.cb0b51330be338b622faa7f0fcdd2a0d.svg",
     "index.html": "/taxi-app-on-react/index.html",
-    "static/media/arrow-down.svg": "/taxi-app-on-react/static/media/arrow-down.606792f89b70a7f753167ac589dce23f.svg",
-    "static/media/chip.svg": "/taxi-app-on-react/static/media/chip.c84e78516ea2acc7fa03.svg",
-    "static/media/ellipse.svg": "/taxi-app-on-react/static/media/ellipse.8e5d16873c6f0779677e.svg",
-    "static/media/dot.svg": "/taxi-app-on-react/static/media/dot.18a35aa876f4af84220b678296bbf73e.svg",
-    "main.75d041fa.css.map": "/taxi-app-on-react/static/css/main.75d041fa.css.map",
-    "main.1d70def3.js.map": "/taxi-app-on-react/static/js/main.1d70def3.js.map",
+    "static/media/arrow-down.svg": "/taxi-app-on-react/static/media/arrow-down.deac810508e6f9902159ed44f68501b1.svg",
+    "static/media/chip.svg": "/taxi-app-on-react/static/media/chip.b24d5f4363080cee381f.svg",
+    "static/media/ellipse.svg": "/taxi-app-on-react/static/media/ellipse.7583510668d09374c8eb.svg",
+    "static/media/dot.svg": "/taxi-app-on-react/static/media/dot.6d0823e3b3bc39a6aa1f0930a341499b.svg",
+    "main.9f3f7909.css.map": "/taxi-app-on-react/static/css/main.9f3f7909.css.map",
+    "main.d96d13bd.js.map": "/taxi-app-on-react/static/js/main.d96d13bd.js.map",
     "787.dd22ab19.chunk.js.map": "/taxi-app-on-react/static/js/787.dd22ab19.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75d041fa.css",
-    "static/js/main.1d70def3.js"
+    "static/css/main.9f3f7909.css",
+    "static/js/main.d96d13bd.js"
   ]
 }
