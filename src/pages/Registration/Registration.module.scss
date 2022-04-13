@@ -25,39 +25,13 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
       align-items: center;
       width: 24rem;
-      height: 25rem;
+      height: 30rem;
       background: #ffffff;
       box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
       border-radius: 20px;
-
-      .form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: 0.5rem;
-        width: 100%;
-
-        .link {
-          font-size: 0.8rem;
-          color: #828282;
-
-          & > button {
-            background-color: transparent;
-            border: none;
-            color: #fdbf5a;
-            text-decoration: none;
-            font-size: 0.8rem;
-
-            &:hover {
-              cursor: pointer;
-            }
-          }
-        }
-      }
     }
   }
 }

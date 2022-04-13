@@ -1,34 +1,35 @@
 import { render } from '@testing-library/react';
-import Button from './Button';
-const BUTTON_TEXT = 'button';
+import userEvent from '@testing-library/user-event';
+import Button from './Button.jsx';
 
 describe('Button Component', () => {
-  it('should render', () => {
-    const { getByText } = render(<Button text={BUTTON_TEXT} />);
-    const btn = getByText(BUTTON_TEXT);
+  test('Есть в DOM', () => {
+    const { queryByText } = render(<Button text="test" />);
+    const button = queryByText('test');
 
-    expect(btn).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
-  it('has proper text', () => {
-    const { getByText } = render(<Button text={BUTTON_TEXT} />);
-    const btn = getByText(BUTTON_TEXT);
 
-    expect(btn).toHaveTextContent(BUTTON_TEXT);
-  });
-  it('has proper type', () => {
-    const { getByText } = render(<Button text={BUTTON_TEXT} type="button" />);
-    const btn = getByText(BUTTON_TEXT);
+  test('Аттрибут type равен button при непереданном значении', () => {
+    const { queryByText } = render(<Button text="test" />);
+    const button = queryByText('test');
 
-    expect(btn).toHaveAttribute('type', 'button');
+    expect(button).toHaveAttribute('type', 'button');
   });
-  it('triggers passed function on click', () => {
+
+  test('Аттрибут type равен переданному значению', () => {
+    const { queryByText } = render(<Button text="test" type="submit" />);
+    const button = queryByText('test');
+
+    expect(button).toHaveAttribute('type', 'submit');
+  });
+
+  test('Переданная функция вызывается при клике на кнопку', () => {
     const mock = jest.fn();
-    const attr = { text: BUTTON_TEXT, type: 'submit', onClick: mock };
-    const { getByText } = render(<Button {...attr} />);
-    const btn = getByText(BUTTON_TEXT);
-
-    btn.click();
-
-    expect(mock).toHaveBeenCalled;
+    const { queryByText } = render(<Button text="test" onClick={mock} />);
+    const button = queryByText('test');
+    userEvent.click(button);
+    userEvent.click(button);
+    expect(mock).toBeCalledTimes(2);
   });
 });

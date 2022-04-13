@@ -24,8 +24,8 @@ const Order = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { from: fromInput, to: toInput } = e.target;
-    const payload = { address1: fromInput.value, address2: toInput.value };
+    const { from, to } = e.target;
+    const payload = { address1: from.value, address2: to.value };
     dispatch(actions.route(payload));
   };
   const handleFromChange = (value) => setFrom(value);
@@ -37,6 +37,7 @@ const Order = () => {
         <AddressInput
           svgComponent={DotSvg}
           placeholder={'Откуда'}
+          required
           name="from"
           onValueChange={handleFromChange}
           options={listForFromInput}
@@ -45,6 +46,7 @@ const Order = () => {
         <AddressInput
           svgComponent={NavSvg}
           placeholder={'Куда'}
+          required
           name="to"
           onValueChange={handleToChange}
           options={listForToInput}

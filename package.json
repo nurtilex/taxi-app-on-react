@@ -48,6 +48,7 @@
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.0",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.29.0",
     "react-redux": "^7.2.6",
     "react-refresh": "^0.11.0",
     "react-router": "^6.2.2",
@@ -99,5 +100,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "cracoConfig": "craco.config.js",
+  "jest": {
+    "moduleNameMapper": {
+      "^@src(.*)$": "<rootDir>/src$1",
+      "^@components(.*)$": "<rootDir>/src/components$1",
+      "^@assets(.*)$": "<rootDir>/src/assets$1",
+      "^@store(.*)$": "<rootDir>/src/store$1",
+      "^@pages(.*)$": "<rootDir>/src/pages$1",
+      "^@helper(.*)$": "<rootDir>/src/services/helper$1",
+      "^@hoc(.*)$": "<rootDir>/src/services/hoc$1",
+      "^@api(.*)$": "<rootDir>/src/services/api$1"
+    }
   }
 }

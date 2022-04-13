@@ -4,8 +4,12 @@ import { ReactComponent as TaxiLogo } from '@assets/lofttaxi.svg';
 
 import css from './Logo.module.scss';
 
-const Logo = ({ direction = 'row' }) => (
-  <div className={css.Logo} style={{ flexDirection: direction }}>
+const Logo = ({ direction = 'row', id = '' }) => (
+  <div
+    className={css.Logo}
+    style={{ flexDirection: direction }}
+    data-testid={id}
+  >
     <RLogo />
     <TaxiLogo />
   </div>

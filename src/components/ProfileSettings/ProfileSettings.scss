@@ -48,13 +48,29 @@
           align-items: stretch;
 
           label {
+            width: 60%;
+            padding: 0 0.4rem;
+            font-size: 0.8rem;
             font-weight: 400;
             width: 100%;
             color: #828282;
           }
           input {
+            border: none;
+            border-bottom: 1px solid gray;
+            width: 60%;
+            height: 1.7rem;
+            padding: 0 0.4rem;
+            outline: none;
             width: 100%;
             font-weight: bold;
+          }
+          .error {
+            color: red;
+            font-size: 0.8rem;
+            text-align: left;
+            padding: 0 0.4rem;
+            width: 60%;
           }
         }
 
@@ -124,5 +140,32 @@
         }
       }
     }
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+      height: 3rem;
+      border-radius: 70px;
+      border: none;
+      color: #000;
+      background-color: #fdbf5a;
+      margin: 1rem 0;
+    
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        color: #000;
+        background-color: #ffa842;
+      }
+      &:disabled {
+        color: #737373;
+        background-color: #d8d7d5;
+        cursor: default;
+      }
+    
+    }
+    
   }
 }

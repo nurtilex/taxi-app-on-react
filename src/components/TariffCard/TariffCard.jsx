@@ -10,7 +10,7 @@ const TariffCard = ({ type, price, onClick }) => {
   };
   const img = require(`../../assets/order-${type}.png`);
   return (
-    <div className={css.TariffCard} onClick={onClick}>
+    <div className={css.TariffCard} onClick={onClick} data-testid='tariff card'>
       <div className={css.type}>{names[type]}</div>
       <span className={css.priceSpan}>Стоимость</span>
       <div className={css.price}>{price}</div>

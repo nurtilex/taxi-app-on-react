@@ -1,91 +1,42 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { resetInputs } from '@helper';
-
-import { errorsSelectors, errorsActions } from '@store/slices/errors';
-import * as actions from '@store/actions';
-import { layoutActions } from '@store/slices/layout';
-import { authSelectors } from '@store/slices/auth';
-import { loginInputs } from '@helper/inputs.config.js';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { isAuthenticatedSelector, loginErrorSelector } from '@store/selectors';
 
 import Logo from '@components/Logo';
-import Button from '@components/Button';
-import Input from '@components/Input/Input';
-import css from './Login.module.scss';
+import LoginForm from '@components/LoginForm';
+import styles from './Login.module.scss';
 
 const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const error = useSelector(loginErrorSelector);
 
-  const isAuthenticated = useSelector(authSelectors.isAuthenticatedSelector);
-  const errorMessage = useSelector(errorsSelectors.loginErrorSelector);
   useEffect(() => {
-    if (errorMessage || isAuthenticated) setLoading(false);
-    if (errorMessage) {
-      alert(errorMessage);
-    }
-    if (isAuthenticated) {
-      navigate(`../map`);
-    }
-  }, [isAuthenticated, errorMessage, navigate]);
-
-  const mappedInputs = loginInputs.map((input) => (
-    <Input {...input} key={input.id} />
-  ));
-  const loader = <div>...Загрузка</div>;
-  const handleRegisterClick = (e, page) => {
-    e.preventDefault();
-    dispatch(layoutActions.setCurrentPage(page));
-    dispatch(errorsActions.setLoginErrorMessage(null));
-    navigate('../registration', { replace: true });
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { email, password } = e.target;
-    dispatch(actions.auth({ email: email.value, password: password.value }));
+    if (error || isAuthenticated) setLoading(false);
+    if (error) alert(error);
+    if (isAuthenticated) navigate(`../map`);
+  }, [isAuthenticated, error, navigate]);
+  
+  const onFormSubmit = () => {
     setLoading(true);
   };
-
+  const loader = <p>...Загрузка</p>;
+  const form = (
+    <>
+      <h2>Войти</h2>
+      <LoginForm onFormSubmit={onFormSubmit} />
+    </>
+  );
   return (
-    <div className={css.Login}>
-      <aside className={css.aside}>
+    <div className={styles.Login}>
+      <aside className={styles.aside}>
         <Logo direction={'column'} />
       </aside>
 
-      <main className={css.main}>
-        <div className={css.formWrapper}>
-          {isLoading ? (
-            loader
-          ) : (
-            <>
-              <h2>Войти</h2>
-              <form
-                action="#"
-                className={css.form}
-                onSubmit={(e) => handleFormSubmit(e)}
-              >
-                {mappedInputs}
-                <div className={css.helpWrapper}>
-                  <a href="##" className={css.helpButton}>
-                    Забыли пароль?
-                  </a>
-                </div>
-                <Button text={'Войти'} type={'submit'} />
-                <div className={css.link}>
-                  Новый пользователь?{' '}
-                  <button
-                    onClick={(e) => handleRegisterClick(e, 'registration')}
-                  >
-                    Регистрация
-                  </button>
-                </div>
-              </form>
-            </>
-          )}
-        </div>
+      <main className={styles.main}>
+        <div className={styles.formWrapper}>{isLoading ? loader : form}</div>
       </main>
     </div>
   );

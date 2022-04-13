@@ -1,0 +1,93 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  .error-message {
+    color: red;
+  }
+
+  .helpButton {
+    align-self: flex-end;
+    padding-right: 20%;
+    margin: 0.2rem 0;
+    background-color: transparent;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #828282;
+    border: transparent;
+    outline: transparent;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  label {
+    width: 60%;
+    padding: 0 0.4rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 60%;
+    height: 1.7rem;
+    padding: 0 0.4rem;
+    outline: none;
+  }
+  input ~ p {
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    padding: 0 0.4rem;
+    width: 60%;
+  }
+
+  .link {
+    font-size: 0.8rem;
+    color: #828282;
+
+    & > button {
+      background-color: transparent;
+      border: none;
+      color: #fdbf5a;
+      text-decoration: none;
+      font-size: 0.8rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 3rem;
+    border-radius: 70px;
+    border: none;
+    color: #000;
+    background-color: #fdbf5a;
+    margin: 1rem 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      color: #000;
+      background-color: #ffa842;
+    }
+    &:disabled {
+      color: #737373;
+      background-color: #d8d7d5;
+      cursor: default;
+    }
+  }
+}

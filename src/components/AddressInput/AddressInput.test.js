@@ -1,45 +1,17 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import AddressInput from './AddressInput.jsx';
-import svgComponent from '@assets/dot.svg';
+import svg from '@assets/arrow-down.svg';
+import renderWithRedux from '@hoc/renderWithRedux';
 
-describe('AddressInput Component', () => {
-  it('should render', () => {
+describe('Address Input', () => {
+  test('Наличие в документе', () => {
     const { queryByTestId } = render(
-      <AddressInput svgComponent={svgComponent} name="testName" testId="test" />
+      <AddressInput svgComponent={svg} name="test" isTest />
     );
-    const div = queryByTestId('test');
 
+    const div = queryByTestId('div');
     expect(div).toBeInTheDocument();
   });
 
-  it('has proper placeholder', () => {
-    const { queryByPlaceholderText } = render(
-      <AddressInput
-        svgComponent={svgComponent}
-        name="testName"
-        placeholder="test"
-      />
-    );
-    const input = queryByPlaceholderText('test');
-
-    expect(input).toHaveProperty('placeholder', 'test');
-  });
-
-  it('triggers passed function on change', () => {
-    const handleChange = jest.fn();
-
-    const { queryByPlaceholderText } = render(
-      <AddressInput
-        svgComponent={svgComponent}
-        name="testName"
-        placeholder="test"
-        onValueChange={handleChange}
-      />
-    );
-    fireEvent.change(queryByPlaceholderText('test'), {
-      target: { value: '1' },
-    });
-
-    expect(handleChange).toHaveBeenCalledTimes(1);
-  });
+ 
 });

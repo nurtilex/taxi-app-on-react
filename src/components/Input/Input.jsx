@@ -3,44 +3,41 @@ import PropTypes from 'prop-types';
 import css from './Input.module.scss';
 
 const Input = ({
-  type,
   name,
-  placeholder,
-  text,
-  required = false,
-  onChange = () => {},
-  value = '',
-  pattern,
-  testId = '',
+  label,
+  register,
+  type,
+  required = true,
+  error = {},
+  placeholder = '',
+  classes = null
 }) => {
   return (
     <>
-      <label htmlFor={name} className={css.label} data-testid={testId}>
-        {text}
+      <label htmlFor={name} className={classes || css.label}>
+        {label}
       </label>
       <input
-        required={required}
-        pattern={pattern}
         type={type}
-        name={name}
         placeholder={placeholder}
-        className={css.input}
-        onChange={(e) => onChange(e)}
-        defaultValue={value}
+        className={classes || css.input}
+        {...register(name, { required })}
       />
+      {error?.type === 'required' && (
+        <p className={css.error}>Поле {name} обязательно</p>
+      )}
     </>
   );
 };
 
 Input.propTypes = {
-  type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  register: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-  testId: PropTypes.string,
+  error: PropTypes.object,
+  placeholder: PropTypes.string,
 };
 
 export default Input;

@@ -1,4 +1,4 @@
-import resetInputs from './resetInputs';
 import drawRoute from './drawRoute';
+import cleanRoute from './cleanRoute';
 
-export { resetInputs, drawRoute };
+export { drawRoute, cleanRoute };

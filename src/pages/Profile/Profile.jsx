@@ -14,26 +14,20 @@ const Profile = () => {
   const [isSaved, setSaved] = useState(false);
   const token = useSelector(authSelectors.tokenSelector);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (data, e) => {
     e.preventDefault();
-    const { name, cardNumber, period, cvc } = e.target;
-    const formData = {
-      cardName: name.value,
-      cardNumber: cardNumber.value,
-      expiryDate: period.value,
-      cvc: cvc.value,
-    };
-    setTimeout(() => setSaved((prev) => !prev), 500);
-    dispatch(payment({ method: 'post', token, payment: formData }));
-  };
 
-  const form = <ProfileSettings onSubmit={handleFormSubmit} />;
-  const message = <SavedMessage />;
+    setTimeout(() => setSaved((prev) => !prev), 500);
+    dispatch(payment({ method: 'post', token, payment: data }));
+  };
 
   return (
     <div className={css.Profile}>
       <Header />
-      <main className={css.main}>{!isSaved ? form : message}</main>
+      <main className={css.main}>
+        {!isSaved && <ProfileSettings onSubmit={handleFormSubmit} />}
+        {isSaved && <SavedMessage />}
+      </main>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { drawRoute } from '@helper';
+import { cleanRoute } from '@helper';
 
 import { authSelectors } from '@store/slices/auth';
 import { userSelectors } from '@store/slices/user';
@@ -21,57 +22,32 @@ const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   useEffect(() => {
-    if (!map.current) {
-      map.current = new mapboxgl.Map({
-        accessToken: mapboxAccessToken,
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v10',
-        center: [30.19, 59.57],
-        zoom: 11,
-      });
-    }
+    console.log(map?.current?.isStyleLoaded());
+  });
+  useEffect(() => {
+    map.current = new mapboxgl.Map({
+      accessToken: mapboxAccessToken,
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/light-v10',
+      center: [30.19, 59.57],
+      zoom: 11,
+    });
+  }, []);
 
+  useEffect(() => {
     if (isAuthenticated && !payment) {
       navigate('/modal', { replace: true });
     }
-    console.log(Array.isArray(coordinates) && coordinates.length > 0);
+  }, [isAuthenticated, payment, navigate]);
+
+  useEffect(() => {
     if (Array.isArray(coordinates) && coordinates.length > 0) {
-      map.current.on('styledata', () => {
-        map.current.flyTo({
-          center: coordinates[0],
-          zoom: 15,
-        });
-
-        map.current.addLayer({
-          id: 'route',
-          type: 'line',
-          source: {
-            type: 'geojson',
-            data: {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'LineString',
-                coordinates,
-              },
-            },
-          },
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-          },
-          paint: {
-            'line-color': '#ffc617',
-            'line-width': 8,
-          },
-        });
-      });
+      if (map.current.isStyleLoaded()) {
+        drawRoute(map.current, coordinates);
+      }
     }
+  }, [coordinates]);
 
-    return () => {
-      map?.current && map?.current.remove();
-    };
-  }, [isAuthenticated, payment, coordinates, navigate]);
   return (
     <div className={css.Map}>
       <Header />

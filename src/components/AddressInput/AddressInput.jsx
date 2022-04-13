@@ -8,8 +8,9 @@ const AddressInput = ({
   svgComponent,
   placeholder = '',
   name,
+  required = false,
   options = [],
-  testId = '',
+  isTest = false,
   onValueChange = () => {
     console.log('onValueChange parameter is empty');
   },
@@ -27,20 +28,22 @@ const AddressInput = ({
     const isValid = options.some((opt) => opt.value === e.target.value);
     if (!isValid) {
       e.target.value = '';
-      return
+      return;
     }
     onValueChange(e.target.value);
   };
 
   return (
-    <div className={css.AddressInput} data-testid={testId}>
+    <div className={css.AddressInput} data-testid={isTest && 'div'}>
       <img src={svgComponent} alt="icon" className={css.icon} />
       <datalist id={`suggestions-for-${name}`}>{mappedOptions}</datalist>
       <input
         type="text"
         name={name}
+        required={required}
         ref={inputRef}
         autoComplete="on"
+        data-testid={isTest && 'input'}
         list={`suggestions-for-${name}`}
         className={css.input}
         placeholder={placeholder}
@@ -67,6 +70,7 @@ AddressInput.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   testId: PropTypes.string,
+  required: PropTypes.bool,
   options: PropTypes.array,
   onValueChange: PropTypes.func,
 };
