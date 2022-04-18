@@ -13,7 +13,6 @@ export function* fetchLocalStorage() {
     yield put(userActions.setEmail({ email: user.email }));
     yield put(userActions.setPayment({ payment: user.payment }));
     yield put(addressesList());
-    console.log();
   }
 }
 

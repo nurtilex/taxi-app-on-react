@@ -5,6 +5,11 @@ import { authActions } from '@store/slices/auth';
 import { userActions } from '@store/slices/user';
 import { errorsActions } from '@store/slices/errors';
 
+function *getNum () {
+  const num = 0
+  yield 1; 
+  yield 2
+}
 export function* fetchAuth({ payload }) {
   try {
     yield put(errorsActions.setLoginErrorMessage(null));
