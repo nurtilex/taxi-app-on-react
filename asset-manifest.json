@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/taxi-app-on-react/static/css/main.9f3f7909.css",
-    "main.js": "/taxi-app-on-react/static/js/main.d96d13bd.js",
+    "main.js": "/taxi-app-on-react/static/js/main.0c96b3e5.js",
     "static/js/787.dd22ab19.chunk.js": "/taxi-app-on-react/static/js/787.dd22ab19.chunk.js",
     "static/media/map-bg.png": "/taxi-app-on-react/static/media/map-bg.6f03adef9250a774ee04.png",
     "static/media/lofttaxi.svg": "/taxi-app-on-react/static/media/lofttaxi.952af46236826d22cc5f09b10694c643.svg",
@@ -13,11 +13,11 @@
     "static/media/ellipse.svg": "/taxi-app-on-react/static/media/ellipse.7583510668d09374c8eb.svg",
     "static/media/dot.svg": "/taxi-app-on-react/static/media/dot.6d0823e3b3bc39a6aa1f0930a341499b.svg",
     "main.9f3f7909.css.map": "/taxi-app-on-react/static/css/main.9f3f7909.css.map",
-    "main.d96d13bd.js.map": "/taxi-app-on-react/static/js/main.d96d13bd.js.map",
+    "main.0c96b3e5.js.map": "/taxi-app-on-react/static/js/main.0c96b3e5.js.map",
     "787.dd22ab19.chunk.js.map": "/taxi-app-on-react/static/js/787.dd22ab19.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f3f7909.css",
-    "static/js/main.d96d13bd.js"
+    "static/js/main.0c96b3e5.js"
   ]
 }
